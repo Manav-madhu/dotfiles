@@ -1,56 +1,59 @@
--- Bootstrap lazy.nvim
+-- 🔹 BOOTSTRAP lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
-    "git", "clone", "--filter=blob:none",
+    "git",
+    "clone",
+    "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", lazypath,
+    "--branch=stable",
+    lazypath,
   })
 end
+
 vim.opt.rtp:prepend(lazypath)
 
+-- 🔹 Plugins
 require("lazy").setup({
+
   -- Colorscheme
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000,
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
     config = function()
       require("catppuccin").setup({ flavour = "mocha" })
-      vim.cmd.colorscheme "catppuccin"
-    end },
+      vim.cmd.colorscheme("catppuccin")
+    end
+  },
 
-  -- File tree
-  { "nvim-neo-tree/neo-tree.nvim", branch = "v3.x",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons",
-                     "MunifTanjim/nui.nvim" } },
-
-  -- Statusline
-  { "nvim-lualine/lualine.nvim",
+  -- Telescope
+  {
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.8",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
+    },
     config = function()
-      require("lualine").setup({ options = { theme = "catppuccin" } })
-    end },
+      require("plugins.telescope")
+    end
+  },
 
-  -- Fuzzy finder
-  { "nvim-telescope/telescope.nvim", tag = "0.1.8",
-    dependencies = { "nvim-lua/plenary.nvim",
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" } },
+  -- Treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
-      require("telescope").setup()
-      require("telescope").load_extension("fzf")
-    end },
-
-  -- Syntax highlighting
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate",
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = { "lua", "python", "javascript", "typescript",
-                             "go", "rust", "bash", "yaml", "json",
-                             "dockerfile", "markdown", "toml" },
-        highlight = { enable = true },
-        indent    = { enable = true },
-      })
-    end },
+      require("plugins.treesitter")
+    end
+  },
 
   -- LSP
-  { "neovim/nvim-lspconfig",
+  {
+    "neovim/nvim-lspconfig",
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -63,20 +66,52 @@ require("lazy").setup({
     },
     config = function()
       require("plugins.lsp")
-    end },
+    end
+  },
 
-  -- Git signs in gutter
-  { "lewis6991/gitsigns.nvim", config = true },
+  -- UI plugins (FIXED)
 
-  -- Auto pairs
-  { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
+  {
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require("plugins.ui").lualine()
+    end
+  },
 
-  -- Comment toggle
-  { "numToStr/Comment.nvim", config = true },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    config = function()
+      require("plugins.ui").ibl()
+    end
+  },
 
-  -- Which-key (shows keybindings)
-  { "folke/which-key.nvim", event = "VeryLazy", config = true },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("plugins.ui").which_key()
+    end
+  },
 
-  -- Indent guides
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", config = true },
+  {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require("plugins.ui").gitsigns()
+    end
+  },
+
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim"
+    },
+    config = function()
+      require("plugins.ui").neo_tree()
+    end
+  },
+
 })

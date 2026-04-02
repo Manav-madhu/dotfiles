@@ -38,12 +38,12 @@ export PATH="$HOME/.local/bin:$PATH"
 
 
 # Start ssh-agent only if not running
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-  eval "$(ssh-agent -s)"
+# Ensure SSH agent is running and connected
+if [ -z "$SSH_AUTH_SOCK" ]; then
+  eval "$(ssh-agent -s)" > /dev/null 2>&1
 fi
 
 # Add key if not already added
-ssh-add -l | grep -q "$(ssh-keygen -lf ~/.ssh/github.pub | awk '{print $2}')" 2>/dev/null
-if [ $? -ne 0 ]; then
-  ssh-add ~/.ssh/github
+if ! ssh-add -l 2>/dev/null | grep -q "$(ssh-keygen -lf ~/.ssh/github.pub | awk '{print $2}')"; then
+  ssh-add ~/.ssh/github > /dev/null
 fi
