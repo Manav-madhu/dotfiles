@@ -1,0 +1,31 @@
+[user]
+    name = Manav Madhu
+    email = manavmadhuofficial@gmail.com
+[core]
+    editor = nvim
+    pager = delta
+
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = true
+
+[delta]
+    navigate = true
+    light = false
+    side-by-side = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    lg = log --oneline --graph --decorate --all
+    undo = reset HEAD~1 --mixed
+    stash-all = stash save --include-untracked
