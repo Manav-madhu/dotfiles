@@ -2,13 +2,13 @@ require("mason").setup()
 require("mason-lspconfig").setup({
   ensure_installed = {
     "lua_ls",
-    "pyright",
-    "ts_ls",
+    --"pyright",
+    --"ts_ls",
     --"gopls",
     --"rust_analyzer",
-    "bashls",
-    "dockerls",
-    "yamlls",
+    --"bashls",
+    --"dockerls",
+    --"yamlls",
   },
 })
 

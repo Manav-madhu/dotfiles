@@ -23,7 +23,7 @@ opt.cursorline = true
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.wrap = false
-opt.colorcolumn = "100"
+--opt.colorcolumn = "100"
 opt.list = true
 opt.listchars = { tab = "→ ", trail = "·", nbsp = "␣" }
 

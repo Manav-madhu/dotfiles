@@ -18,15 +18,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 
   -- Colorscheme
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    config = function()
-      require("catppuccin").setup({ flavour = "mocha" })
-      vim.cmd.colorscheme("catppuccin")
-    end
-  },
+
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
   -- Telescope
   {
@@ -70,13 +63,6 @@ require("lazy").setup({
   },
 
   -- UI plugins (FIXED)
-
-  {
-    "nvim-lualine/lualine.nvim",
-    config = function()
-      require("plugins.ui").lualine()
-    end
-  },
 
   {
     "lukas-reineke/indent-blankline.nvim",

@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Iosevka-Term:pixelsize=17:antialias=true:autohint=true";
+static char *font = "IosevkaTerm NF:pixelsize=17:antialias=true:autohint=true";
 static int borderpx = 0;
 static const int linespace = 0;
 /*
