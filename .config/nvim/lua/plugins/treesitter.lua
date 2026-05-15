@@ -5,7 +5,7 @@ end
 
 configs.setup({
   ensure_installed = {
-    "lua", "python", "javascript", "typescript",
+    "html","tsx", "lua", "python", "javascript", "typescript",
     "go", "rust", "bash", "yaml", "json",
     "dockerfile", "markdown", "toml"
   },

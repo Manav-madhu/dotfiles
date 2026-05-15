@@ -1,5 +1,12 @@
 local M = {}
 
+function M.lualine()
+  require("lualine").setup({
+    options = {
+      theme = require("catppuccin.utils.lualine"),
+    },
+  })
+end
 
 function M.ibl()
   require("ibl").setup()

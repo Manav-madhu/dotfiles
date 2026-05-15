@@ -99,5 +99,31 @@ require("lazy").setup({
       require("plugins.ui").neo_tree()
     end
   },
-
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    config = function ()
+      local npairs = require("nvim-autopairs")
+      local Rule = require("nvim-autopairs.rule")
+      npairs.setup({})
+      -- 👇 ADD RULES HERE
+      npairs.add_rules({
+        Rule("<", ">")
+      })
+    end
+    -- use opts = {} for passing setup options
+    -- this is equivalent to setup({}) function
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require("nvim-ts-autotag").setup({
+        opts = {
+          enable_close = true,      -- auto close tags
+          enable_rename = true,     -- auto rename pairs
+          enable_close_on_slash = true
+        }
+})    end
+  },
 })

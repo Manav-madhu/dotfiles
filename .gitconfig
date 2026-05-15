@@ -29,3 +29,5 @@
     lg = log --oneline --graph --decorate --all
     undo = reset HEAD~1 --mixed
     stash-all = stash save --include-untracked
+[safe]
+	directory = /srv/http/terminal-Paag

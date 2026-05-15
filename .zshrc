@@ -45,5 +45,5 @@ fi
 
 # Add key if not already added
 if ! ssh-add -l 2>/dev/null | grep -q "$(ssh-keygen -lf ~/.ssh/github.pub | awk '{print $2}')"; then
-  ssh-add ~/.ssh/github > /dev/null
+  ssh-add ~/.ssh/github > /dev/null 2>&1
 fi
